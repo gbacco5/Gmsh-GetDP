@@ -26,8 +26,8 @@ Constraint{
     {Name ElectricScalarPotential;
      Type Assign;
      Case{
-        {Region Elet_Inf;Value 0.;}
-        {Region Elet_Sup;Value 1.;}
+        {Region Elet_Inf; Value 0.;}
+        {Region Elet_Sup; Value 1.;}
         }
     }
 }

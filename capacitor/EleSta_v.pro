@@ -1,38 +1,38 @@
 /* -------------------------------------------------------------------
-   File "EleSta_v.pro"
+File "EleSta_v.pro"
 
-   Electrostatics - Electric scalar potential v formulation
-   ------------------------------------------------------------------- 
+Electrostatics - Electric scalar potential v formulation
+------------------------------------------------------------------- 
 
-   I N P U T
-   ---------
+I N P U T
+---------
 
-   Global Groups :  (Extension '_Ele' is for Electric problem)
-   -------------
-   Domain_Ele               Whole electric domain (not used)
-   DomainCC_Ele             Nonconducting regions
-   DomainC_Ele              Conducting regions (not used)
+Global Groups :  (Extension '_Ele' is for Electric problem)
+-------------
+Domain_Ele               Whole electric domain (not used)
+DomainCC_Ele             Nonconducting regions
+DomainC_Ele              Conducting regions (not used)
 
-   Function :
-   --------
-   epsr[]                   Relative permittivity
+Function :
+--------
+epsr[]                   Relative permittivity
 
-   Constraint :
-   ----------
-   ElectricScalarPotential  Fixed electric scalar potential
-                            (classical boundary condition)
+Constraint :
+----------
+ElectricScalarPotential  Fixed electric scalar potential
+                        (classical boundary condition)
 
-   Physical constants :
-   ------------------                                               */
+Physical constants :
+------------------                                               */
 
-   eps0 = 8.854187818e-12;
+eps0 = 8.854187818e-12;
 
 Group {
-  DefineGroup[ Domain_Ele, DomainCC_Ele, DomainC_Ele ];
+    DefineGroup[ Dominio ];
 }
 
 Function {
-  DefineFunction[ epsr ];
+    DefineFunction[ epsr ];
 }
 
 FunctionSpace {
@@ -41,7 +41,7 @@ FunctionSpace {
       // v = v  s   ,  for all nodes
       //      n  n
       { Name sn; NameOfCoef vn; Function BF_Node;
-        Support DomainCC_Ele; Entity NodesOf[ All ]; }
+        Support Dominio; Entity NodesOf[ All ]; }
     }
     Constraint {
       { NameOfCoef vn; EntityType NodesOf; 
@@ -57,7 +57,7 @@ Formulation {
       { Name v; Type Local; NameOfSpace Hgrad_v_Ele; }
     }
     Equation {
-      Galerkin { [ epsr[] * Dof{d v} , {d v} ]; In DomainCC_Ele; 
+      Galerkin { [ epsr[] * Dof{d v} , {d v} ]; In Dominio; 
                  Jacobian Vol; Integration GradGrad; }
     }
   }
@@ -81,17 +81,17 @@ PostProcessing {
     Quantity {
       { Name v; 
         Value { 
-          Local { [ {v} ]; In DomainCC_Ele; Jacobian Vol; } 
+          Local { [ {v} ]; In Dominio; Jacobian Vol; } 
         }
       }
       { Name e; 
         Value { 
-          Local { [ -{d v} ]; In DomainCC_Ele; Jacobian Vol; }
+          Local { [ -{d v} ]; In Dominio; Jacobian Vol; }
         }
       }
       { Name d; 
         Value { 
-          Local { [ -eps0*epsr[] * {d v} ]; In DomainCC_Ele; 
+          Local { [ -eps0*epsr[] * {d v} ]; In Dominio; 
                                              Jacobian Vol; } 
         } 
       }
