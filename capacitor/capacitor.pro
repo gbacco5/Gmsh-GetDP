@@ -38,3 +38,20 @@ in a black box, can now be included */
 Include "Jacobian_Lib.pro"
 Include "Integration_Lib.pro"
 Include "EleSta_v.pro"
+
+// Post-processing
+PostOperation{
+    {Name Mappa; NameOfPostProcessing EleSta_v;
+        Operation{
+            Print[v,OnElementsOf Dominio, File "V.pos"];
+            Print[e,OnElementsOf Dominio, File "E.pos"];
+            Print[d,OnElementsOf Dominio, File "D.pos"];
+        }
+    }
+    {Name Forza; NameOfPostProcessing EleSta_v;
+        Operation{
+            Print[MSTe,OnElementsOf Dominio, File "MSTe.pos"];
+        }
+    }
+    // {Name Campi_su_linee};
+}

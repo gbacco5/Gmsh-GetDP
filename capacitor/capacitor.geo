@@ -55,4 +55,3 @@ Printf('Physical objects created...');
 
 // mesh refinements
 Characteristic Length {3} = lenc2/factor;
-
