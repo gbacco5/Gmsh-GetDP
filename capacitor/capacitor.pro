@@ -48,7 +48,7 @@ PostOperation{
             Print[d,OnElementsOf Dominio, File "D.pos"];
         }
     }
-    {Name Forza; NameOfPostProcessing EleSta_v;
+    {Name MSTe; NameOfPostProcessing EleSta_v;
         Operation{
             Print[MSTe,OnElementsOf Dominio, File "MSTe.pos"];
         }

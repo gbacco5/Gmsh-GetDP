@@ -1,5 +1,5 @@
 // data
-mm = 1e-3;
+mm = 1.e-3;
 lenc = 5*mm;
 factor = 3 ;
 lenc2 = lenc/factor;

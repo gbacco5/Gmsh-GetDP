@@ -98,8 +98,7 @@ PostProcessing {
       {Name MSTe;
        Value {
           Local { [eps0*epsr[]*SquDyadicProduct[{d v}] 
-            - 0.5*eps0*epsr[]*SquNorm[{d v}]*
-            (SquDyadicProduct[Vector[1,0,0]] + SquDyadicProduct[Vector[0,1,0]] + SquDyadicProduct[Vector[0,0,1]]) ];
+            - 0.5*eps0*epsr[]*SquNorm[{d v}]*TensorDiag[1,1,1] ];
                 In Dominio; Jacobian Vol; }
        }
       }
