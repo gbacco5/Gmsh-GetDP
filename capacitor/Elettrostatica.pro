@@ -4,8 +4,6 @@ dielettrico 101
 aria 102
 elettrodo inferiore 103
 elettrodo superiore 104
-
-prova di modifica
 */
 
 Group{
@@ -21,6 +19,22 @@ Function{
     epsr[Diel] = 9.5;
 }
 
+/* Now, some Dirichlet conditions are defined. The name
+’ElectricScalarPotential’ refers to the constraint name given in
+the function space */
 Constraint{
     {Name ElectricScalarPotential;
-    
+     Type Assign;
+     Case{
+        {Region Elet_Inf;Value 0.;}
+        {Region Elet_Sup;Value 1.;}
+        }
+    }
+}
+
+
+/* The formulation used and its tools, considered as being
+in a black box, can now be included */
+Include "Jacobian_Lib.pro"
+Include "Integration_Lib.pro"
+Include "EleSta_v.pro"
